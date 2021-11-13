@@ -23,6 +23,8 @@ dependencies {
 
 	// Apache Kafka
 	implementation("org.apache.kafka:kafka-clients:3.0.0")
+
+	implementation("com.google.code.gson:gson:2.8.9")
 }
 
 tasks.withType<KotlinCompile> {
