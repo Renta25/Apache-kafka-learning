@@ -1,5 +1,7 @@
 package com.example.Apachekafkatest.Producer
 
+import com.example.Apachekafkatest.Producer.Config.CustomPartitioner
+import com.example.Apachekafkatest.Producer.Config.GsonSerializer
 import com.example.Apachekafkatest.Producer.Models.Order
 import com.example.Apachekafkatest.Producer.Models.Shop
 import org.apache.kafka.clients.producer.Callback
@@ -23,6 +25,7 @@ class KafkaOrderProducer {
         properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, GsonSerializer::class.java)
         properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, GsonSerializer::class.java)
         properties.put(ProducerConfig.CLIENT_ID_CONFIG, "Producer-1")
+        properties.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, CustomPartitioner::class.java)
 
         return properties
     }

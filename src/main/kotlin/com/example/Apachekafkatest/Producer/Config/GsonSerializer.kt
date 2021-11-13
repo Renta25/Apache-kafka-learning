@@ -1,4 +1,4 @@
-package com.example.Apachekafkatest.Producer
+package com.example.Apachekafkatest.Producer.Config
 
 import com.google.gson.Gson
 import org.apache.kafka.common.serialization.Serializer
