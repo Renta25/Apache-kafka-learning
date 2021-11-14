@@ -1,7 +1,7 @@
 package com.example.Apachekafkatest.Producer.Config
 
-import com.example.Apachekafkatest.Producer.Models.Shop
-import com.example.Apachekafkatest.Producer.Models.getPartition
+import com.example.Apachekafkatest.Models.Shop
+import com.example.Apachekafkatest.Models.getPartition
 import org.apache.kafka.clients.producer.Partitioner
 import org.apache.kafka.common.Cluster
 import org.slf4j.LoggerFactory

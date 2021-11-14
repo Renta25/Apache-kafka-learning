@@ -1,15 +1,13 @@
 package com.example.Apachekafkatest.Schedulers
 
-import com.example.Apachekafkatest.Producer.Data.ShopData
+import com.example.Apachekafkatest.Data.ShopData
 import com.example.Apachekafkatest.Producer.KafkaOrderProducer
-import com.example.Apachekafkatest.Producer.Models.Order
-import com.example.Apachekafkatest.Producer.Models.Shop
-import com.example.Apachekafkatest.Producer.Models.getShop
-import org.apache.kafka.clients.producer.Callback
+import com.example.Apachekafkatest.Models.Order
+import com.example.Apachekafkatest.Models.Shop
+import com.example.Apachekafkatest.Models.getShop
 import org.slf4j.LoggerFactory
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
-import java.util.logging.Logger
 import kotlin.random.Random
 
 @Component
@@ -18,7 +16,7 @@ class OrderSenderSchedulers {
     private val orderSendController: KafkaOrderProducer = KafkaOrderProducer()
     private val logger = LoggerFactory.getLogger(OrderSenderSchedulers::class.java)
 
-    @Scheduled(cron = "0/2 * * * * * ")
+    @Scheduled(cron = "*/2 * * * * * ")
     fun start(){
         orderSendController.sendRecord(getOrderSource(), getOrder()) { metadata, exception ->
             logger.info(metadata.toString())

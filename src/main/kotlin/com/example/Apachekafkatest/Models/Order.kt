@@ -1,4 +1,4 @@
-package com.example.Apachekafkatest.Producer.Models
+package com.example.Apachekafkatest.Models
 
 data class Order(
     val userId: Long,

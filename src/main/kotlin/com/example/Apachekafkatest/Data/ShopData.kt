@@ -1,6 +1,6 @@
-package com.example.Apachekafkatest.Producer.Data
+package com.example.Apachekafkatest.Data
 
-import com.example.Apachekafkatest.Producer.Models.ShopPartition
+import com.example.Apachekafkatest.Models.ShopPartition
 
 class ShopData {
     companion object{

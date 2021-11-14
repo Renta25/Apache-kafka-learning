@@ -1,4 +1,4 @@
-package com.example.Apachekafkatest.Producer.Models
+package com.example.Apachekafkatest.Models
 
 data class ShopPartition(
     val name: String,

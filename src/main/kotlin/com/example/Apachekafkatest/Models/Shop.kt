@@ -1,6 +1,6 @@
-package com.example.Apachekafkatest.Producer.Models
+package com.example.Apachekafkatest.Models
 
-import com.example.Apachekafkatest.Producer.Data.ShopData
+import com.example.Apachekafkatest.Data.ShopData
 
 data class Shop(
     val name: String
