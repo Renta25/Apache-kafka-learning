@@ -4,10 +4,7 @@ import com.example.Apachekafkatest.Config
 import com.example.Apachekafkatest.Models.AppType
 import com.example.Apachekafkatest.Models.Order
 import com.example.Apachekafkatest.Models.Shop
-import org.apache.kafka.clients.consumer.Consumer
-import org.apache.kafka.clients.consumer.ConsumerConfig
-import org.apache.kafka.clients.consumer.KafkaConsumer
-import org.apache.kafka.clients.consumer.OffsetAndMetadata
+import org.apache.kafka.clients.consumer.*
 import org.apache.kafka.common.TopicPartition
 import org.apache.kafka.common.serialization.StringDeserializer
 import org.slf4j.LoggerFactory
@@ -41,12 +38,26 @@ class KafkaOrderConsumer {
         properties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest")
         properties.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "false")
 
+        properties.put(ConsumerConfig.MAX_POLL_INTERVAL_MS_CONFIG, Int.MAX_VALUE) // defult: Int.MAX_VALUE
+        properties.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, 250) //defult: 500
+        properties.put(ConsumerConfig.FETCH_MIN_BYTES_CONFIG, 1) //defult: 1byte
+        properties.put(ConsumerConfig.FETCH_MAX_BYTES_CONFIG, 52428800) //defult: 52428800 byte
+        properties.put(ConsumerConfig.FETCH_MAX_WAIT_MS_CONFIG, 500) //defult: 500ms
+        properties.put(ConsumerConfig.MAX_PARTITION_FETCH_BYTES_CONFIG, 1048576) //defult: 1048576 byte
+
+//        properties.put(ConsumerConfig.PARTITION_ASSIGNMENT_STRATEGY_CONFIG, RangeAssignor::class.java) //zachowanie na więcej niż jedne słuchacz w grupie
+
+        properties.put(ConsumerConfig.REQUEST_TIMEOUT_MS_CONFIG, 30000) //defult: 30000ms
+        properties.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, 10000)  //defult: 10000ms
+        properties.put(ConsumerConfig.HEARTBEAT_INTERVAL_MS_CONFIG, 3000) // I'am live
+
         return properties
     }
 
     @OptIn(ExperimentalStdlibApi::class)
     private fun orderListening(){
         consumer?.subscribe(Collections.singletonList(topicTitle))
+        //consumer?.assign()
         while (true) {
             consumer?.poll(Duration.ofMillis(1000))?.forEach {
                 logger.info(it.toString())
